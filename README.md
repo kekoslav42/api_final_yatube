@@ -15,7 +15,7 @@ REST framework v3.12.4
 # Запуск на компьтере
 1. Клонировать репозиторий
 ```bash
-git clone https://github.com/leks20/api_yatube
+git clone https://github.com/kekoslav42/api_final_yatube.git
 ```
 2. Создать виртуальное окружение и установить зависимости
 ```bash
