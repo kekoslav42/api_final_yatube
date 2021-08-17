@@ -1,13 +1,22 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import filters, viewsets
+from rest_framework import filters, mixins, viewsets
 from rest_framework.permissions import (IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 
 from posts.models import Follow, Group, Post
-
 from .permission import IsAuthorOrReadOnly
 from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
                           PostSerializer)
+
+
+class MyModelViewSet(mixins.CreateModelMixin,
+                     mixins.DestroyModelMixin,
+                     mixins.ListModelMixin,
+                     viewsets.GenericViewSet):
+    """
+    The possibility of updating is removed
+    """
+    pass
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -40,9 +49,10 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class FollowViewSet(viewsets.ModelViewSet):
+class FollowViewSet(MyModelViewSet):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
+
     permission_classes = [IsAuthorOrReadOnly, IsAuthenticated]
     filter_backends = [filters.SearchFilter]
     search_fields = ('user__username', 'following__username')
