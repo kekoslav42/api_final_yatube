@@ -14,25 +14,25 @@ REST framework v3.12.4
   
 # Запуск на компьтере
 1. Клонировать репозиторий
-```
-git clone https://github.com/leks20/api_yatube</h1>
+```bash
+git clone https://github.com/leks20/api_yatube
 ```
 2. Создать виртуальное окружение и установить зависимости
-```
+```bash
 python3 -m venv venv
 venv/bin/activate
 pip install -r requirements.txt
 ```
 3. Выполните миграции
-```
+```bash
 python manage.py migrate
 ```
 4. Создайте супер пользователя
-```
+```bash
 python manage.py createsuperuser
 ```
 5. Запустите локальный сервер
-```
+```bash
 python manage.py runserver
 ```
 
@@ -43,15 +43,15 @@ python manage.py runserver
 # Как работает API
 <h3>Пример 1.</h3>
 
-Запрос к апи создания поста:
-```
+Запрос к API создания поста:
+```python
 url = 'http://127.0.0.1/api/v1/posts/'
 data = {'text': 'POST'}
 headers = {'Authorization': 'Bearer TOKEN'}
 request = requests.post(url, data=data, headers=headers)
 ```
-Ответ от апи:
-```
+Ответ от API:
+```json
 {
   "id": 0,
   "text": "string",
@@ -62,14 +62,14 @@ request = requests.post(url, data=data, headers=headers)
 
 <h3>Пример 2.</h3>
 
-Запрос к апи просмотра подписок:
-```
+Запрос к API просмотра подписок:
+```python
 url = 'http://127.0.0.1:8000/api/v1/follow/'
 headers = {'Authorization': 'Bearer TOKEN'}
 request = requests.get(api, headers=headers)
 ```
-Ответ от апи:
-```
+Ответ от API:
+```json
 [
   {
     "user": "string",
@@ -79,12 +79,12 @@ request = requests.get(api, headers=headers)
 ```
 
 # Аутентификация 
-Для получения токена для работы с апи нужно перейти на 
+Для получения токена для работы с API нужно перейти на 
 ```http://127.0.0.1:8000/jwt/create/```
 и передать в запросе username/password.
 
 API вернет токен в виде:
-```
+```json
 {
     "refresh": "",
     "access": ""
